@@ -26,7 +26,7 @@ export default function Footer() {
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
             <li><a href="https://wa.me/447341158348" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>WhatsApp: +44 7341 158348</a></li>
             <li><a href="https://www.instagram.com/darkemarculture" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Instagram: @darkemarculture</a></li>
-            <li><a href="#" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>TikTok: @darkemarculture</a></li>
+            <li><a href="https://www.tiktok.com/@darkemarculture" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>TikTok: @darkemarculture</a></li>
           </ul>
         </div>
       </div>
