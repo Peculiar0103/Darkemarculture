@@ -49,10 +49,23 @@ export default function ProductCard({ product }: ProductCardProps) {
           fontWeight: '400', 
           color: 'var(--text-secondary)', 
           fontSize: '0.95rem',
-          fontFamily: 'var(--font-body)'
+          fontFamily: 'var(--font-body)',
+          marginBottom: '0.5rem'
         }}>
           {displayPrice}
         </p>
+
+        <Link href={`/product/${product.slug}`} style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.15em',
+          color: 'var(--text-primary)',
+          borderBottom: '1px solid var(--border-color)',
+          paddingBottom: '2px',
+          display: 'inline-block'
+        }}>
+          Explore
+        </Link>
       </div>
 
     </div>
