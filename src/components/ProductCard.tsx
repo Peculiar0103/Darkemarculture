@@ -22,7 +22,8 @@ export default function ProductCard({ product }: ProductCardProps) {
       
       {thumbnail && (
         <Link href={`/product/${product.slug}`}>
-          <div className="product-card-img-wrapper" style={{ width: '100%', height: '500px' }}>
+          {/* 4:5 Portrait Ratio Container */}
+          <div className="product-card-img-wrapper" style={{ width: '100%', aspectRatio: '4/5' }}>
             <img 
               src={thumbnail} 
               alt={product.name} 
@@ -33,39 +34,25 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Link>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div>
-          <h3 style={{ 
-            fontSize: '1.2rem', 
-            marginBottom: '0.25rem', 
-            fontWeight: '400',
-            letterSpacing: '1px'
-          }}>
-            <Link href={`/product/${product.slug}`}>{product.name}</Link>
-          </h3>
-          <p style={{ 
-            color: 'var(--text-secondary)', 
-            fontSize: '0.75rem', 
-            textTransform: 'uppercase', 
-            letterSpacing: '2px' 
-          }}>
-            {product.category}
-          </p>
-        </div>
+      {/* Product Info - Minimalist underneath */}
+      <div style={{ textAlign: 'center' }}>
+        <h3 style={{ 
+          fontSize: '1rem', 
+          marginBottom: '0.5rem', 
+          fontWeight: '500',
+          fontFamily: 'var(--font-body)'
+        }}>
+          <Link href={`/product/${product.slug}`}>{product.name}</Link>
+        </h3>
         
-        <div style={{ textAlign: 'right' }}>
-          <p style={{ 
-            fontWeight: '300', 
-            color: 'var(--text-primary)', 
-            fontSize: '1.1rem',
-            fontFamily: 'var(--font-heading)'
-          }}>
-            {displayPrice}
-          </p>
-          <Link href={`/product/${product.slug}`}>
-             <span className="product-card-view-text">View Details</span>
-          </Link>
-        </div>
+        <p style={{ 
+          fontWeight: '400', 
+          color: 'var(--text-secondary)', 
+          fontSize: '0.95rem',
+          fontFamily: 'var(--font-body)'
+        }}>
+          {displayPrice}
+        </p>
       </div>
 
     </div>
