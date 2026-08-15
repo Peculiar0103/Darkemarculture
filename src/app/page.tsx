@@ -6,71 +6,57 @@ export default function Home() {
   return (
     <div style={{ background: 'var(--bg-color)' }}>
       
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION - Editorial Campaign Style */}
       <section style={{ 
-        height: '95vh', 
-        position: 'relative',
+        height: '90vh', 
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        padding: '0 5%',
+        gap: '5%'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 0
-        }}>
+        {/* Left: Typography */}
+        <div className="animate-fade-in" style={{ flex: '1 1 40%', zIndex: 1, paddingLeft: '5%' }}>
+          <h1 style={{ 
+            fontSize: 'clamp(3rem, 7vw, 6rem)', 
+            letterSpacing: '0.02em',
+            marginBottom: '1rem',
+            lineHeight: '1',
+            textTransform: 'uppercase'
+          }}>
+            Darkemar<br />Culture
+          </h1>
+          <h2 style={{ 
+            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+            fontStyle: 'italic',
+            marginBottom: '2rem',
+            fontWeight: 400,
+            color: 'var(--text-secondary)'
+          }}>
+            Wear your roots with pride.
+          </h2>
+          <p style={{ 
+            fontSize: '0.85rem', 
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '4rem',
+            color: 'var(--accent-color)'
+          }}>
+            Luxury African Ready-to-Wear
+          </p>
+          <Link href="/shop" className="btn btn-solid">
+            Shop the Collection
+          </Link>
+        </div>
+
+        {/* Right: Immersive Product Image */}
+        <div style={{ flex: '1 1 60%', height: '80vh', overflow: 'hidden' }}>
           <img 
             src="/images/products/aso-oke-long-dress/image-01.jpeg" 
             alt="Darkemar Culture Aso Oke" 
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%' }}
             className="enhanced-product-img"
           />
-          {/* Subtle gradient for text readability */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(to bottom, rgba(23,21,19,0.3) 0%, rgba(23,21,19,0.7) 100%)'
-          }}></div>
-        </div>
-
-        <div className="container animate-fade-in" style={{ zIndex: 1, textAlign: 'center', width: '100%', color: 'var(--bg-color)' }}>
-          <h1 style={{ 
-            fontSize: 'clamp(2.5rem, 6vw, 5rem)', 
-            letterSpacing: '0.05em',
-            marginBottom: '1rem',
-            textTransform: 'uppercase'
-          }}>
-            Darkemar Culture
-          </h1>
-          <h2 style={{ 
-            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-            fontStyle: 'italic',
-            marginBottom: '1rem',
-            fontWeight: 400
-          }}>
-            Wear your roots with pride.
-          </h2>
-          <p style={{ 
-            fontSize: '0.9rem', 
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            fontFamily: 'var(--font-body)',
-            marginBottom: '3rem'
-          }}>
-            Luxury African Ready-to-Wear
-          </p>
-          <Link href="/shop" className="btn" style={{ 
-            borderColor: 'var(--bg-color)', 
-            color: 'var(--bg-color)'
-          }}>
-            Shop the Collection
-          </Link>
         </div>
       </section>
 
@@ -117,8 +103,8 @@ export default function Home() {
           
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '4rem 6rem' 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', 
+            gap: '8rem 6rem' 
           }}>
             {sampleProducts.slice(0, 3).map((product, index) => (
               <div key={product.id} style={{ marginTop: index === 1 ? '4rem' : '0' }}>

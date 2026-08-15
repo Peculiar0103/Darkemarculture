@@ -20,10 +20,10 @@ export default function Header() {
           <Image src="/logo.jpeg" alt="Darkemar Culture Logo" width={60} height={60} style={{ borderRadius: '50%', objectFit: 'cover' }} />
         </Link>
         <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <Link href="/" style={{ fontWeight: 500 }}>Home</Link>
-          <Link href="/shop" style={{ fontWeight: 500 }}>Shop</Link>
-          <Link href="/about" style={{ fontWeight: 500 }}>About</Link>
-          <Link href="/contact" style={{ fontWeight: 500 }}>Contact</Link>
+          <Link href="/" style={{ fontWeight: 500, textTransform: 'uppercase' }}>Home</Link>
+          <Link href="/shop" style={{ fontWeight: 500, textTransform: 'uppercase' }}>Shop</Link>
+          <Link href="/about" style={{ fontWeight: 500, textTransform: 'uppercase' }}>About</Link>
+          <Link href="/contact" style={{ fontWeight: 500, textTransform: 'uppercase' }}>Contact</Link>
         </nav>
       </div>
     </header>
