@@ -1,13 +1,21 @@
 :root {
-  --primary-color: #121212; /* Very deep charcoal/black */
-  --secondary-color: #2a2a2a; /* Slightly lighter charcoal */
-  --accent-color: #C5A059; /* Deep muted bronze */
-  --accent-hover: #9E8045; /* Darker bronze for hover */
-  --text-primary: #f8f8f8; /* Off-white for luxury dark mode */
-  --text-secondary: #a0a0a0;
-  --bg-color: #0a0a0a; /* True luxury black */
-  --border-color: #333333;
-  --font-heading: 'Playfair Display', serif;
+  /* Deep Charcoal / Near Black */
+  --bg-color: #0c0c0c;
+  --bg-secondary: #161616;
+  
+  /* Restrained Warm Gold/Brass */
+  --accent-color: #C5A059; 
+  --accent-hover: #D4AF37;
+  
+  /* Warm Ivory / Neutral */
+  --text-primary: #FAF9F6; 
+  --text-secondary: #8c8c8c;
+  --text-muted: #555555;
+  
+  --border-color: #2a2a2a;
+  
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
 }
 
@@ -27,14 +35,15 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 400; /* Lighter weight for elegance */
-  letter-spacing: 1px;
+  font-weight: 300; /* Ultra-light weight for high fashion feel */
+  letter-spacing: 0.05em;
+  line-height: 1.2;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 a:hover {
@@ -43,95 +52,106 @@ a:hover {
 
 /* Animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slowFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-fade-in {
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-/* Base button styling */
+.animate-slow-fade {
+  animation: slowFade 2s ease forwards;
+}
+
+/* Base button styling - Minimal, elegant borders */
 .btn {
   display: inline-block;
-  padding: 14px 32px;
-  background-color: var(--accent-color);
-  color: var(--primary-color);
-  border: 1px solid var(--accent-color);
+  padding: 16px 40px;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   cursor: pointer;
   font-family: var(--font-body);
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-weight: 400;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-align: center;
-  transition: all 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .btn:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border-color: var(--accent-color);
+}
+
+.btn-solid {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: 1px solid var(--accent-color);
+}
+
+.btn-solid:hover {
   background-color: transparent;
   color: var(--accent-color);
 }
 
-.btn-secondary {
-  background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--text-secondary);
-}
-
-.btn-secondary:hover {
-  background-color: var(--text-primary);
-  color: var(--primary-color);
-  border-color: var(--text-primary);
-}
-
 /* Safe Photo Enhancement (CSS Filters) */
 .enhanced-product-img {
-  filter: brightness(1.05) contrast(1.05) saturate(1.05);
+  filter: brightness(1.03) contrast(1.05) saturate(1.05);
 }
 
 /* Container */
 .container {
-  max-width: 1400px; /* Wider for luxury feel */
+  max-width: 1600px; /* Extremely wide for editorial feel */
   margin: 0 auto;
   padding: 0 5%;
 }
 
 /* Header Tweaks */
 header {
-  background: rgba(10, 10, 10, 0.85) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  background: rgba(12, 12, 12, 0.9) !important;
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255,255,255,0.03) !important;
+  padding: 1.5rem 0; /* Taller header */
 }
 
 /* Product Card Luxury Tweaks */
 .product-card {
   background: transparent !important;
   border: none !important;
-  border-radius: 0 !important;
+}
+
+.product-card-img-wrapper {
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-secondary);
 }
 
 .product-card img {
-  transition: transform 0.7s ease;
+  transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .product-card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.03); /* Slower, more subtle scale */
 }
 
-.product-card .btn {
+.product-card-view-text {
   opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s ease;
+  transition: opacity 0.5s ease;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-color);
 }
 
-.product-card:hover .btn {
+.product-card:hover .product-card-view-text {
   opacity: 1;
-  transform: translateY(0);
 }
