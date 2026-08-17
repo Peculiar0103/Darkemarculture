@@ -29,6 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               alt={product.name} 
               style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
               className="enhanced-product-img"
+              loading="lazy"
             />
           </div>
         </Link>
@@ -62,7 +63,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           color: 'var(--text-primary)',
           borderBottom: '1px solid var(--border-color)',
           paddingBottom: '2px',
-          display: 'inline-block'
+          display: 'inline-block',
+          padding: '10px 0'
         }}>
           Explore
         </Link>

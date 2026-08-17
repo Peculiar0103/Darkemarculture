@@ -43,11 +43,10 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
       <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 'calc(100vh - 100px)' }}>
         
         {/* Left Side - Sticky Image */}
-        <div style={{ 
-          flex: '1 1 50%', 
+        <div className="desktop-half" style={{ 
           position: 'relative', 
           background: 'var(--bg-secondary)',
-          minHeight: '600px'
+          minHeight: '50vh'
         }}>
           <div style={{ position: 'sticky', top: '100px', height: 'calc(100vh - 100px)', padding: '2rem' }}>
             <img 
@@ -60,7 +59,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         </div>
 
         {/* Right Side - Details & Form */}
-        <div style={{ flex: '1 1 50%', padding: '8% 10%' }}>
+        <div className="desktop-half" style={{ padding: '8% 10%' }}>
           
           <div style={{ marginBottom: '4rem' }}>
             <p style={{ 

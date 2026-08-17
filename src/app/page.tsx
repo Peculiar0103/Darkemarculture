@@ -7,17 +7,26 @@ export default function Home() {
     <div style={{ background: 'var(--bg-color)' }}>
       
       {/* 1. HERO SECTION - Editorial Campaign Style */}
-      <section style={{ 
-        height: '90vh', 
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 5%',
-        gap: '5%'
+      <section className="editorial-flex hero-flex" style={{ 
+        minHeight: '85vh',
+        padding: '0', 
+        gap: '0'
       }}>
+        <style dangerouslySetInnerHTML={{__html: `
+          .hero-flex { flex-direction: column-reverse; }
+          @media (min-width: 768px) { .hero-flex { flex-direction: row; } }
+        `}} />
         {/* Left: Typography */}
-        <div className="animate-fade-in" style={{ flex: '1 1 40%', zIndex: 1, paddingLeft: '5%' }}>
-          <h1 style={{ 
-            fontSize: 'clamp(3rem, 7vw, 6rem)', 
+        <div className="animate-fade-in" style={{ 
+          flex: '1 1 40%', 
+          zIndex: 1, 
+          padding: '10% 20px', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'center'
+        }}>
+          {/* We'll handle visual order via inline styles that desktop overrides, or better just structure it Image First, and use CSS flex-direction: column-reverse if needed. Let's do Image First structurally. */}
+          <h1 className="fluid-h1" style={{ 
             letterSpacing: '0.02em',
             marginBottom: '1rem',
             lineHeight: '1',
@@ -25,8 +34,7 @@ export default function Home() {
           }}>
             Darkemar<br />Culture
           </h1>
-          <h2 style={{ 
-            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+          <h2 className="fluid-h3" style={{ 
             fontStyle: 'italic',
             marginBottom: '2rem',
             fontWeight: 400,
@@ -44,13 +52,21 @@ export default function Home() {
           }}>
             Luxury African Ready-to-Wear
           </p>
-          <Link href="/shop" className="btn btn-solid">
-            Shop the Collection
-          </Link>
+          <div>
+            <Link href="/shop" className="btn btn-solid">
+              Shop the Collection
+            </Link>
+          </div>
         </div>
 
-        {/* Right: Immersive Product Image */}
-        <div style={{ flex: '1 1 60%', height: '80vh', overflow: 'hidden' }}>
+        {/* Right (Mobile Top): Immersive Product Image */}
+        <div style={{ 
+          flex: '1 1 60%', 
+          height: '65vh', // height on mobile
+          minHeight: '65vh',
+          width: '100%',
+          overflow: 'hidden'
+        }}>
           <img 
             src="/images/products/aso-oke-long-dress/image-01.jpeg" 
             alt="Darkemar Culture Aso Oke" 
@@ -61,11 +77,10 @@ export default function Home() {
       </section>
 
       {/* 2. CULTURAL BRAND STATEMENT */}
-      <section style={{ padding: '160px 0', background: 'var(--bg-color)' }}>
-        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '6rem' }}>
-          <div style={{ flex: '1 1 400px' }}>
-            <h2 style={{ 
-              fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', 
+      <section className="section-pad" style={{ background: 'var(--bg-color)' }}>
+        <div className="container editorial-flex" style={{ gap: '4rem' }}>
+          <div style={{ flex: '1 1 100%' }}>
+            <h2 className="fluid-h2" style={{ 
               lineHeight: '1.2',
               marginBottom: '2.5rem'
             }}>
@@ -82,13 +97,14 @@ export default function Home() {
             </p>
           </div>
           {/* LARGE FASHION IMAGE */}
-          <div style={{ flex: '1 1 500px' }}>
+          <div style={{ flex: '1 1 500px', width: '100%' }}>
             <div style={{ aspectRatio: '3/4', width: '100%', overflow: 'hidden' }}>
               <img 
                 src="/images/products/2piece-set-adire-crepe/image-01.jpeg" 
                 alt="Darkemar Culture Heritage"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 className="enhanced-product-img"
+                loading="lazy"
               />
             </div>
           </div>
@@ -96,39 +112,48 @@ export default function Home() {
       </section>
 
       {/* 3. EDITORIAL COLLECTION - Asymmetrical Magazine Layout */}
-      <section style={{ padding: '160px 0', background: 'var(--bg-secondary)' }}>
+      <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
-            gap: '8rem 4rem' 
-          }}>
+            gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))',
+            gap: '4rem 2rem' 
+          }} className="collection-grid">
+            <style dangerouslySetInnerHTML={{__html: `
+              @media (min-width: 768px) {
+                .collection-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+              }
+            `}} />
             {sampleProducts.slice(0, 3).map((product, index) => (
-              <div key={product.id} style={{ 
-                /* Create visual rhythm: 3rd item spans full width but is heavily padded */
-                gridColumn: index === 2 ? '1 / -1' : 'auto',
-                padding: index === 2 ? '0 15%' : '0'
-              }}>
+              <div key={product.id} className={index === 2 ? "collection-dominant" : ""}>
                 <ProductCard product={product} />
               </div>
             ))}
           </div>
         </div>
+        <style dangerouslySetInnerHTML={{__html: `
+          @media (min-width: 768px) {
+            .collection-dominant {
+              grid-column: 1 / -1;
+              padding: 0 15%;
+              margin-top: 4rem;
+            }
+          }
+        `}} />
       </section>
 
       {/* 4. WHY DARKEMAR CULTURE */}
-      <section style={{ padding: '160px 0', background: 'var(--bg-color)' }}>
+      <section className="section-pad" style={{ background: 'var(--bg-color)' }}>
         <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{ 
-            fontSize: '3rem', 
+          <h2 className="fluid-h2" style={{ 
             marginBottom: '4rem', 
-            textAlign: 'center'
+            textAlign: 'left' // Mobile friendly reading
           }}>
             Why Darkemar Culture
           </h2>
           <ul style={{ 
-            fontSize: '1.3rem', 
+            fontSize: '1.15rem', 
             lineHeight: '1.8', 
             color: 'var(--text-secondary)',
             display: 'flex',
@@ -137,24 +162,22 @@ export default function Home() {
             listStyle: 'none',
             fontFamily: 'var(--font-heading)'
           }}>
-            <li style={{ paddingLeft: '2rem', borderLeft: '1px solid var(--border-color)' }}>A deep love for African culture and tradition.</li>
-            <li style={{ paddingLeft: '2rem', borderLeft: '1px solid var(--border-color)' }}>A desire to help Africans in the diaspora stay connected to their roots.</li>
-            <li style={{ paddingLeft: '2rem', borderLeft: '1px solid var(--border-color)' }}>A passion for beautiful, high-quality Aso Oke and traditional attire.</li>
-            <li style={{ paddingLeft: '2rem', borderLeft: '1px solid var(--border-color)' }}>The belief that culture should be celebrated and proudly represented through fashion.</li>
-            <li style={{ paddingLeft: '2rem', borderLeft: '1px solid var(--border-color)' }}>A desire to make luxury African fashion more accessible for special occasions.</li>
+            <li style={{ paddingLeft: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>A deep love for African culture and tradition.</li>
+            <li style={{ paddingLeft: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>A desire to help Africans in the diaspora stay connected to their roots.</li>
+            <li style={{ paddingLeft: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>A passion for beautiful, high-quality Aso Oke and traditional attire.</li>
+            <li style={{ paddingLeft: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>The belief that culture should be celebrated and proudly represented through fashion.</li>
+            <li style={{ paddingLeft: '1.5rem', borderLeft: '1px solid var(--border-color)' }}>A desire to make luxury African fashion more accessible for special occasions.</li>
           </ul>
         </div>
       </section>
 
       {/* 5. FULL-WIDTH FASHION IMAGE BRAND MOMENT */}
-      <section style={{ 
-        padding: '160px 0', 
+      <section className="section-pad" style={{ 
         textAlign: 'center', 
         background: 'var(--bg-secondary)',
       }}>
         <div className="container">
-          <h2 style={{ 
-            fontSize: 'clamp(3rem, 6vw, 5rem)', 
+          <h2 className="fluid-h2" style={{ 
             lineHeight: '1.1',
             textTransform: 'uppercase',
             letterSpacing: '0.02em',
@@ -162,22 +185,29 @@ export default function Home() {
           }}>
             Wear your roots with pride.
           </h2>
-          <div style={{ aspectRatio: '16/9', width: '100%', overflow: 'hidden' }}>
+          <div style={{ aspectRatio: '4/5', width: '100%', overflow: 'hidden' }} className="brand-moment-img">
             <img 
               src="/images/products/ankara-with-stone/image-01.jpeg" 
               alt="Brand Moment"
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
               className="enhanced-product-img"
+              loading="lazy"
             />
           </div>
         </div>
+        <style dangerouslySetInnerHTML={{__html: `
+          @media (min-width: 768px) {
+            .brand-moment-img {
+              aspect-ratio: 16/9 !important;
+            }
+          }
+        `}} />
       </section>
 
       {/* 6. FINAL CALL TO ACTION */}
-      <section style={{ padding: '200px 0', textAlign: 'center', background: 'var(--bg-color)' }}>
+      <section className="section-pad" style={{ textAlign: 'center', background: 'var(--bg-color)' }}>
         <div className="container">
-          <h2 style={{ 
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
+          <h2 className="fluid-h2" style={{ 
             marginBottom: '2.5rem',
             lineHeight: '1.3'
           }}>
@@ -187,7 +217,7 @@ export default function Home() {
           </h2>
           <p style={{ 
             color: 'var(--text-secondary)', 
-            fontSize: '1.1rem', 
+            fontSize: '1rem', 
             marginBottom: '4rem', 
             fontFamily: 'var(--font-body)'
           }}>

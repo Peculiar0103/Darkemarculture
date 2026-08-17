@@ -3,7 +3,7 @@ import ProductCard from '@/components/ProductCard'
 
 export default function ShopPage() {
   return (
-    <div style={{ padding: '120px 0', minHeight: '100vh', background: 'var(--bg-color)' }}>
+    <div className="section-pad" style={{ minHeight: '100vh', background: 'var(--bg-color)' }}>
       <div className="container">
         
         {/* Editorial Header */}
@@ -28,9 +28,7 @@ export default function ShopPage() {
         </div>
         
         {/* Spacious Grid */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', 
+        <div className="responsive-grid" style={{ 
           gap: '6rem 4rem' 
         }}>
           {sampleProducts.map((product) => (
