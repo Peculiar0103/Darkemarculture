@@ -16,7 +16,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || '')
   const [selectedColor, setSelectedColor] = useState<string>(product.colors[0] || '')
   const [quantity, setQuantity] = useState<number>(1)
-  const [activeImage, setActiveImage] = useState<string>(product.images && product.images.length > 0 ? product.images[0] : '')
+  const [activeIndex, setActiveIndex] = useState<number>(0)
 
   const activeCurrency = 'GBP'
   const displayPrice = activeCurrency === 'GBP' ? `£${product.priceGBP}` : `₦${product.priceNGN.toLocaleString()}`
@@ -40,7 +40,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         </Link>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 'calc(100vh - 100px)' }}>
+      <div className="container" style={{ display: 'flex', flexWrap: 'wrap', minHeight: 'calc(100vh - 100px)' }}>
         
         {/* Left Side - Sticky Image */}
         <div className="desktop-half" style={{ 
@@ -48,13 +48,44 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
           background: 'var(--bg-secondary)',
           minHeight: '50vh'
         }}>
-          <div style={{ position: 'sticky', top: '100px', height: 'calc(100vh - 100px)', padding: '2rem' }}>
-            <img 
-              src={activeImage} 
-              alt={product.name} 
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
-              className="enhanced-product-img" 
-            />
+          <div style={{ position: 'sticky', top: '100px', height: 'calc(100vh - 100px)', padding: '2rem', display: 'flex', alignItems: 'center' }}>
+            {product.images && product.images.length > 1 && (
+              <button 
+                onClick={() => setActiveIndex(prev => prev === 0 ? product.images.length - 1 : prev - 1)}
+                style={{ position: 'absolute', left: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                &#8592;
+              </button>
+            )}
+            
+            {product.images && product.images.length > 0 && (
+              <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
+                {product.images[activeIndex].match(/\.(mp4|webm)$/i) ? (
+                  <video 
+                    src={product.images[activeIndex]} 
+                    autoPlay loop muted playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                    className="enhanced-product-img" 
+                  />
+                ) : (
+                  <img 
+                    src={product.images[activeIndex]} 
+                    alt={product.name} 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                    className="enhanced-product-img" 
+                  />
+                )}
+              </div>
+            )}
+
+            {product.images && product.images.length > 1 && (
+              <button 
+                onClick={() => setActiveIndex(prev => (prev + 1) % product.images.length)}
+                style={{ position: 'absolute', right: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                &#8594;
+              </button>
+            )}
           </div>
         </div>
 
@@ -205,39 +236,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             Order via WhatsApp
           </a>
 
-          {/* Alternate Views / Thumbnails */}
-          {product.images && product.images.length > 1 && (
-            <div style={{ marginTop: '5rem', borderTop: '1px solid var(--border-color)', paddingTop: '3rem' }}>
-              <p style={{ 
-                  color: 'var(--text-secondary)', 
-                  textTransform: 'uppercase', 
-                  fontSize: '0.75rem', 
-                  letterSpacing: '2px',
-                  marginBottom: '1.5rem'
-                }}>
-                Alternate Views
-              </p>
-              <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '1rem' }}>
-                {product.images.map((img, idx) => (
-                  <div 
-                    key={idx} 
-                    onClick={() => setActiveImage(img)}
-                    style={{ 
-                      width: '80px', 
-                      height: '100px', 
-                      cursor: 'pointer',
-                      border: activeImage === img ? '1px solid var(--accent-color)' : '1px solid var(--border-color)',
-                      opacity: activeImage === img ? 1 : 0.4,
-                      transition: 'all 0.3s ease',
-                      flexShrink: 0
-                    }}
-                  >
-                    <img src={img} alt={`View ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} className="enhanced-product-img" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+
 
         </div>
       </div>

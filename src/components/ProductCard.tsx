@@ -9,8 +9,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const activeCurrency = 'GBP'
   const displayPrice = activeCurrency === 'GBP' ? `£${product.priceGBP}` : `₦${product.priceNGN.toLocaleString()}`
 
-  // Use the first image as the thumbnail, or fallback if no images exist
-  const thumbnail = product.images && product.images.length > 0 ? product.images[0] : null
+  const isVideo = (url: string) => url.match(/\.(mp4|webm)$/i)
 
   return (
     <div className="product-card" style={{ 
@@ -19,20 +18,50 @@ export default function ProductCard({ product }: ProductCardProps) {
       gap: '1.5rem',
       cursor: 'pointer'
     }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scroll::-webkit-scrollbar { display: none; }
+      `}} />
       
-      {thumbnail && (
-        <Link href={`/product/${product.slug}`}>
-          {/* 4:5 Portrait Ratio Container */}
-          <div className="product-card-img-wrapper" style={{ width: '100%', aspectRatio: '4/5' }}>
-            <img 
-              src={thumbnail} 
-              alt={product.name} 
-              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
-              className="enhanced-product-img"
-              loading="lazy"
-            />
-          </div>
-        </Link>
+      {product.images && product.images.length > 0 && (
+        <div className="hide-scroll" style={{ 
+          display: 'flex', 
+          overflowX: 'auto', 
+          scrollSnapType: 'x mandatory',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          width: '100%'
+        }}>
+          {product.images.map((media, idx) => (
+            <div key={idx} style={{ 
+              flex: '0 0 100%', 
+              scrollSnapAlign: 'start',
+              position: 'relative',
+              aspectRatio: '4/5'
+            }}>
+              <Link href={`/product/${product.slug}`} style={{ display: 'block', width: '100%', height: '100%' }}>
+                {isVideo(media) ? (
+                  <video 
+                    src={media}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
+                    className="enhanced-product-img"
+                  />
+                ) : (
+                  <img 
+                    src={media} 
+                    alt={`${product.name} view ${idx + 1}`} 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
+                    className="enhanced-product-img"
+                    loading={idx === 0 ? "eager" : "lazy"}
+                  />
+                )}
+              </Link>
+            </div>
+          ))}
+        </div>
       )}
 
       {/* Product Info - Minimalist underneath */}

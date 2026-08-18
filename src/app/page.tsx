@@ -7,79 +7,83 @@ export default function Home() {
     <div style={{ background: 'var(--bg-color)' }}>
       
       {/* 1. HERO SECTION - Editorial Campaign Style */}
-      <section className="editorial-flex hero-flex" style={{ 
-        minHeight: '85vh',
-        padding: '0', 
-        gap: '0'
-      }}>
-        <style dangerouslySetInnerHTML={{__html: `
-          .hero-flex { flex-direction: column-reverse; }
-          @media (min-width: 768px) { .hero-flex { flex-direction: row; } }
-        `}} />
-        {/* Left: Typography */}
-        <div className="animate-fade-in" style={{ 
-          flex: '1 1 40%', 
-          zIndex: 1, 
-          padding: '10% 20px', 
-          display: 'flex', 
-          flexDirection: 'column', 
-          justifyContent: 'center'
+      <section style={{ background: 'var(--bg-color)' }}>
+        <div className="container editorial-flex hero-flex" style={{ 
+          minHeight: '85vh',
+          paddingTop: '2rem',
+          paddingBottom: '2rem',
+          gap: '2rem'
         }}>
-          {/* We'll handle visual order via inline styles that desktop overrides, or better just structure it Image First, and use CSS flex-direction: column-reverse if needed. Let's do Image First structurally. */}
-          <h1 className="fluid-h1" style={{ 
-            letterSpacing: '0.02em',
-            marginBottom: '1rem',
-            lineHeight: '1',
-            textTransform: 'uppercase'
+          <style dangerouslySetInnerHTML={{__html: `
+            .hero-flex { flex-direction: column-reverse; align-items: center; }
+            @media (min-width: 768px) { .hero-flex { flex-direction: row; } }
+          `}} />
+          
+          {/* Left: Typography */}
+          <div className="animate-fade-in" style={{ 
+            flex: '1 1 50%', 
+            zIndex: 1, 
+            padding: '20px 0', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'center'
           }}>
-            Darkemar<br />Culture
-          </h1>
-          <h2 className="fluid-h3" style={{ 
-            fontStyle: 'italic',
-            marginBottom: '2rem',
-            fontWeight: 400,
-            color: 'var(--text-secondary)'
-          }}>
-            Wear your roots with pride.
-          </h2>
-          <p style={{ 
-            fontSize: '0.85rem', 
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            fontFamily: 'var(--font-body)',
-            marginBottom: '4rem',
-            color: 'var(--accent-color)'
-          }}>
-            Luxury African Ready-to-Wear
-          </p>
-          <div>
-            <Link href="/shop" className="btn btn-solid">
-              Shop the Collection
-            </Link>
+            <h1 className="fluid-h1" style={{ 
+              letterSpacing: '0.02em',
+              marginBottom: '1rem',
+              lineHeight: '1',
+              textTransform: 'uppercase'
+            }}>
+              Darkemar<br />Culture
+            </h1>
+            <h2 className="fluid-h3" style={{ 
+              fontStyle: 'italic',
+              marginBottom: '2rem',
+              fontWeight: 400,
+              color: 'var(--text-secondary)'
+            }}>
+              Wear your roots with pride.
+            </h2>
+            <p style={{ 
+              fontSize: '0.85rem', 
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              fontFamily: 'var(--font-body)',
+              marginBottom: '4rem',
+              color: 'var(--accent-color)'
+            }}>
+              Luxury African Ready-to-Wear
+            </p>
+            <div>
+              <Link href="/shop" className="btn btn-solid">
+                Shop the Collection
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Right (Mobile Top): Immersive Product Image */}
-        <div style={{ 
-          flex: '1 1 60%', 
-          height: '65vh', // height on mobile
-          minHeight: '65vh',
-          width: '100%',
-          overflow: 'hidden'
-        }}>
-          <img 
-            src="/images/products/aso-oke-long-dress/image-01.jpeg" 
-            alt="Darkemar Culture Aso Oke" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%' }}
-            className="enhanced-product-img"
-          />
+          {/* Right: Immersive Product Image */}
+          <div style={{ 
+            flex: '1 1 50%', 
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center'
+          }}>
+            <div style={{ width: '100%', maxWidth: '600px', aspectRatio: '4/5', overflow: 'hidden' }}>
+              <img 
+                src="/images/new-hero-image.jpeg" 
+                alt="Darkemar Culture Aso Oke" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                className="enhanced-product-img"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 2. CULTURAL BRAND STATEMENT */}
       <section className="section-pad" style={{ background: 'var(--bg-color)' }}>
         <div className="container editorial-flex" style={{ gap: '4rem' }}>
-          <div style={{ flex: '1 1 100%' }}>
+          <div style={{ flex: 1 }}>
             <h2 className="fluid-h2" style={{ 
               lineHeight: '1.2',
               marginBottom: '2.5rem'
@@ -96,11 +100,12 @@ export default function Home() {
               At Darkemar Culture, fashion is more than clothing. It is a celebration of culture, heritage and identity, creating styles that allow you to wear your roots with pride.
             </p>
           </div>
+          
           {/* LARGE FASHION IMAGE */}
           <div style={{ flex: '1 1 500px', width: '100%' }}>
             <div style={{ aspectRatio: '3/4', width: '100%', overflow: 'hidden' }}>
               <img 
-                src="/images/products/2piece-set-adire-crepe/image-01.jpeg" 
+                src="/images/culture-heritage.jpeg" 
                 alt="Darkemar Culture Heritage"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 className="enhanced-product-img"
@@ -115,16 +120,7 @@ export default function Home() {
       <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))',
-            gap: '4rem 2rem' 
-          }} className="collection-grid">
-            <style dangerouslySetInnerHTML={{__html: `
-              @media (min-width: 768px) {
-                .collection-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
-              }
-            `}} />
+          <div className="responsive-grid" style={{ gap: '4rem 2rem' }}>
             {sampleProducts.slice(0, 3).map((product, index) => (
               <div key={product.id} className={index === 2 ? "collection-dominant" : ""}>
                 <ProductCard product={product} />
@@ -187,7 +183,7 @@ export default function Home() {
           </h2>
           <div style={{ aspectRatio: '4/5', width: '100%', overflow: 'hidden' }} className="brand-moment-img">
             <img 
-              src="/images/products/ankara-with-stone/image-01.jpeg" 
+              src="/images/brand-moment.jpeg" 
               alt="Brand Moment"
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
               className="enhanced-product-img"
@@ -195,13 +191,6 @@ export default function Home() {
             />
           </div>
         </div>
-        <style dangerouslySetInnerHTML={{__html: `
-          @media (min-width: 768px) {
-            .brand-moment-img {
-              aspect-ratio: 16/9 !important;
-            }
-          }
-        `}} />
       </section>
 
       {/* 6. FINAL CALL TO ACTION */}

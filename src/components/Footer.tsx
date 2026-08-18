@@ -13,12 +13,12 @@ export default function Footer() {
       }}>
         {/* We use a wrapper div that changes flex-direction using our globals.css rules */}
         <div className="editorial-flex" style={{ gap: '3rem', alignItems: 'flex-start' }}>
-          <div style={{ flex: '1 1 100%' }}>
+          <div style={{ flex: 1 }}>
             <h3 style={{ color: 'var(--accent-color)', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', fontSize: '1.5rem' }}>Darkemar Culture</h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.8' }}>Luxury African fashion that celebrates heritage, elegance, and cultural pride.</p>
           </div>
           
-          <div style={{ flex: '1 1 100%' }}>
+          <div style={{ flex: 1 }}>
             <h4 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', fontSize: '1.2rem', letterSpacing: '0.05em' }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li><a href="/shop" style={{ color: 'var(--text-secondary)', fontSize: '1rem', display: 'block', padding: '12px 0' }}>Shop</a></li>
@@ -28,7 +28,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div style={{ flex: '1 1 100%' }}>
+          <div style={{ flex: 1 }}>
             <h4 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', fontFamily: 'var(--font-heading)', fontSize: '1.2rem', letterSpacing: '0.05em' }}>Contact</h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li><a href="https://wa.me/447341158348" style={{ color: 'var(--text-secondary)', fontSize: '1rem', display: 'block', padding: '12px 0' }}>WhatsApp: +44 7341 158348</a></li>
