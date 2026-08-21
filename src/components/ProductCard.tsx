@@ -46,14 +46,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                     loop
                     muted
                     playsInline
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
                     className="enhanced-product-img"
                   />
                 ) : (
                   <img 
                     src={media} 
                     alt={`${product.name} view ${idx + 1}`} 
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
                     className="enhanced-product-img"
                     loading={idx === 0 ? "eager" : "lazy"}
                   />

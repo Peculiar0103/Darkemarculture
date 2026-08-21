@@ -14,9 +14,9 @@ export default function ContactPage() {
           <a href="https://www.instagram.com/darkemarculture" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ minWidth: '250px' }}>
             Follow on Instagram
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ minWidth: '250px' }}>
-            Follow on TikTok
-          </a>
+            <a href="https://www.tiktok.com/@darkemar.readytowear?_r=1&_t=ZS-98yLxjWxtA5" className="btn btn-solid" style={{ minWidth: '250px' }}>
+              Follow on TikTok
+            </a>
         </div>
       </div>
     </div>

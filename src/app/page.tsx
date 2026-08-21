@@ -127,6 +127,12 @@ export default function Home() {
               </div>
             ))}
           </div>
+          
+          <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+            <Link href="/shop" className="btn btn-solid">
+              Explore Collection
+            </Link>
+          </div>
         </div>
         <style dangerouslySetInnerHTML={{__html: `
           @media (min-width: 768px) {

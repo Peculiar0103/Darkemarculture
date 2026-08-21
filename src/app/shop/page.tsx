@@ -28,9 +28,7 @@ export default function ShopPage() {
         </div>
         
         {/* Spacious Grid */}
-        <div className="responsive-grid" style={{ 
-          gap: '6rem 4rem' 
-        }}>
+        <div className="shop-grid">
           {sampleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

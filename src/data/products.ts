@@ -19,9 +19,9 @@ export const sampleProducts: Product[] = [
     slug: "ankara-with-stone",
     category: "Ankara",
     priceGBP: 45,
-    priceNGN: 67500, // Roughly £45 * 1500 for NGN if needed, or based on previous exchange rate. Let's use £1 = 1500 NGN
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    colors: ["Default"],
+    priceNGN: 67500,
+    sizes: [],
+    colors: [],
     inStock: true,
     description: "Elegant Ankara adorned with beautiful stone embellishments. A perfect blend of traditional pattern and modern luxury detailing.",
     images: ["/images/products/ankara-with-stone/image-01.jpeg", "/images/products/ankara-with-stone/image-02.jpeg"]
@@ -33,8 +33,8 @@ export const sampleProducts: Product[] = [
     category: "Aso Oke",
     priceGBP: 50,
     priceNGN: 75000,
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Default"],
+    sizes: [],
+    colors: [],
     inStock: true,
     description: "A majestic Aso Oke long dress. Crafted from premium hand-woven fabric, designed to offer a regal and timeless silhouette.",
     images: ["/images/products/aso-oke-long-dress/image-01.jpeg", "/images/products/aso-oke-long-dress/image-02.jpeg"]
@@ -46,8 +46,8 @@ export const sampleProducts: Product[] = [
     category: "Aso Oke",
     priceGBP: 60,
     priceNGN: 90000,
-    sizes: ["One Size Fits Most"],
-    colors: ["Default"],
+    sizes: [],
+    colors: [],
     inStock: true,
     description: "Our signature free-flowing Aso Oke Bubu, heavily embellished with premium stones for a luxurious, sparkling finish.",
     images: ["/images/products/aso-oke-bubu-stoned/image-01.jpeg", "/images/products/aso-oke-bubu-stoned/image-02.jpeg"]
@@ -59,8 +59,8 @@ export const sampleProducts: Product[] = [
     category: "Brocade",
     priceGBP: 65,
     priceNGN: 97500,
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Default"],
+    sizes: [],
+    colors: [],
     inStock: true,
     description: "Premium Turkey brocade fabric tailored into a sophisticated masterpiece. Characterised by its rich texture and exquisite drape.",
     images: ["/images/products/turkey-brocade/image-01.jpeg", "/images/products/turkey-brocade/image-02.jpeg"]
@@ -72,11 +72,11 @@ export const sampleProducts: Product[] = [
     category: "Ankara",
     priceGBP: 45,
     priceNGN: 67500,
-    sizes: ["One Size Fits Most"],
-    colors: ["Default"],
+    sizes: [],
+    colors: [],
     inStock: true,
     description: "Comfortable and stylish Ankara Bubu dress featuring delicate stone detailing for added elegance.",
-    images: [] // No folder found yet
+    images: [] // Pending images from client
   },
   {
     id: "6",
@@ -85,8 +85,8 @@ export const sampleProducts: Product[] = [
     category: "Ankara",
     priceGBP: 40,
     priceNGN: 60000,
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Default"],
+    sizes: [],
+    colors: [],
     inStock: true,
     description: "A stunning floor-length Ankara gown. The intricate stone work elevates this traditional piece into modern luxury.",
     images: ["/images/products/ankara-long-gown-with-stone/image-01.jpeg", "/images/products/ankara-long-gown-with-stone/image-02.jpeg"]
@@ -98,7 +98,7 @@ export const sampleProducts: Product[] = [
     category: "Adire",
     priceGBP: 35,
     priceNGN: 52500,
-    sizes: ["S", "M", "L", "XL", "XXL"],
+    sizes: [],
     colors: ["Rust & Green", "Blue & Olive", "Mustard & Blue", "Orange & Green", "Navyblue & Yellow Gold", "Teal & Wine Red"],
     inStock: true,
     description: "A vibrant and contemporary 2-piece set made from premium Adire crepe. Available in multiple striking colour combinations.",

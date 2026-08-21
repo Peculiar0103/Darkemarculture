@@ -22,7 +22,18 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const displayPrice = activeCurrency === 'GBP' ? `£${product.priceGBP}` : `₦${product.priceNGN.toLocaleString()}`
 
   const phoneNumber = "447341158348"
-  const message = `Hello Darkemar Culture, I would like to order the ${product.name}.\nSize: ${selectedSize}\nColour: ${selectedColor}\nQuantity: ${quantity}\nPrice: ${displayPrice}`
+  const optionsText = [
+    selectedSize ? `Size: ${selectedSize}` : null,
+    selectedColor && selectedColor !== "Default" ? `Colour: ${selectedColor}` : null
+  ].filter(Boolean).join('\n')
+
+  const message = `Hello Darkemar Culture, I would like to order:
+Product: ${product.name}
+Price: £${product.priceGBP}
+Quantity: ${quantity}
+${optionsText}
+
+Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
 
   return (
@@ -42,50 +53,103 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
       <div className="container" style={{ display: 'flex', flexWrap: 'wrap', minHeight: 'calc(100vh - 100px)' }}>
         
-        {/* Left Side - Sticky Image */}
+        {/* Left Side - Gallery */}
         <div className="desktop-half" style={{ 
           position: 'relative', 
           background: 'var(--bg-secondary)',
           minHeight: '50vh'
         }}>
-          <div style={{ position: 'sticky', top: '100px', height: 'calc(100vh - 100px)', padding: '2rem', display: 'flex', alignItems: 'center' }}>
-            {product.images && product.images.length > 1 && (
-              <button 
-                onClick={() => setActiveIndex(prev => prev === 0 ? product.images.length - 1 : prev - 1)}
-                style={{ position: 'absolute', left: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                &#8592;
-              </button>
-            )}
+          <div style={{ position: 'sticky', top: '100px', height: 'calc(100vh - 100px)', display: 'flex', padding: '2rem' }}>
             
-            {product.images && product.images.length > 0 && (
-              <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
-                {product.images[activeIndex].match(/\.(mp4|webm)$/i) ? (
-                  <video 
-                    src={product.images[activeIndex]} 
-                    autoPlay loop muted playsInline
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
-                    className="enhanced-product-img" 
-                  />
-                ) : (
-                  <img 
-                    src={product.images[activeIndex]} 
-                    alt={product.name} 
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
-                    className="enhanced-product-img" 
-                  />
-                )}
+            {/* Desktop Thumbnails (Hidden on mobile) */}
+            {product.images && product.images.length > 1 && (
+              <div className="mobile-hide hide-scroll" style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '1rem', 
+                width: '80px', 
+                marginRight: '2rem',
+                overflowY: 'auto',
+                paddingRight: '10px'
+              }}>
+                {product.images.map((img, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => setActiveIndex(idx)}
+                    style={{
+                      border: `1px solid ${activeIndex === idx ? 'var(--text-primary)' : 'transparent'}`,
+                      background: 'transparent',
+                      padding: '2px',
+                      cursor: 'pointer',
+                      aspectRatio: '3/4',
+                      width: '100%'
+                    }}
+                  >
+                    {img.match(/\.(mp4|webm)$/i) ? (
+                      <video src={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} muted />
+                    ) : (
+                      <img src={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="thumbnail" />
+                    )}
+                  </button>
+                ))}
               </div>
             )}
 
-            {product.images && product.images.length > 1 && (
-              <button 
-                onClick={() => setActiveIndex(prev => (prev + 1) % product.images.length)}
-                style={{ position: 'absolute', right: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                &#8594;
-              </button>
-            )}
+            {/* Main Image Container */}
+            <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              
+              {/* Mobile Arrows (Only show on mobile if > 1 image) */}
+              <style dangerouslySetInnerHTML={{__html: `
+                @media (min-width: 768px) { .mobile-arrows { display: none !important; } }
+              `}} />
+              
+              {product.images && product.images.length > 1 && (
+                <button 
+                  className="mobile-arrows"
+                  onClick={() => setActiveIndex(prev => prev === 0 ? product.images.length - 1 : prev - 1)}
+                  style={{ position: 'absolute', left: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  &#8592;
+                </button>
+              )}
+              
+              {product.images && product.images.length > 0 ? (
+                <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+                  {product.images[activeIndex].match(/\.(mp4|webm)$/i) ? (
+                    <video 
+                      key={product.images[activeIndex]}
+                      src={product.images[activeIndex]} 
+                      autoPlay loop muted playsInline
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                      className="enhanced-product-img animate-fade-in" 
+                    />
+                  ) : (
+                    <img 
+                      key={product.images[activeIndex]}
+                      src={product.images[activeIndex]} 
+                      alt={product.name} 
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                      className="enhanced-product-img animate-fade-in" 
+                    />
+                  )}
+                </div>
+              ) : (
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+                  Images pending
+                </div>
+              )}
+
+              {product.images && product.images.length > 1 && (
+                <button 
+                  className="mobile-arrows"
+                  onClick={() => setActiveIndex(prev => (prev + 1) % product.images.length)}
+                  style={{ position: 'absolute', right: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  &#8594;
+                </button>
+              )}
+            </div>
+
           </div>
         </div>
 
