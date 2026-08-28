@@ -18,8 +18,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const [quantity, setQuantity] = useState<number>(1)
   const [activeIndex, setActiveIndex] = useState<number>(0)
 
-  const activeCurrency = 'GBP'
-  const displayPrice = activeCurrency === 'GBP' ? `£${product.priceGBP}` : `₦${product.priceNGN.toLocaleString()}`
+  const displayPrice = `£${product.priceGBP}`
 
   const phoneNumber = "447341158348"
   const optionsText = [
