@@ -26,8 +26,8 @@
 }
 
 html, body {
-  /* NO HORIZONTAL SCROLLING ON MOBILE */
-  max-width: 100%;
+  /* STRICT NO HORIZONTAL SCROLLING */
+  max-width: 100vw;
   overflow-x: hidden;
   font-family: var(--font-body);
   background-color: var(--bg-color);
@@ -40,12 +40,6 @@ html, body {
 @media (min-width: 1400px) {
   html, body {
     font-size: 17px;
-  }
-}
-
-@media (min-width: 2000px) {
-  html, body {
-    font-size: 20px;
   }
 }
 
@@ -73,7 +67,7 @@ a:hover {
 
 /* Animations */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -83,11 +77,11 @@ a:hover {
 }
 
 .animate-fade-in {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slow-fade {
-  animation: slowFade 1.5s ease forwards;
+  animation: slowFade 1.2s ease forwards;
 }
 
 /* Button styling - Strict Guidelines */
@@ -95,7 +89,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 36px;
+  padding: 12px 28px;
   background-color: transparent;
   color: var(--text-primary);
   border: 1px solid var(--text-primary);
@@ -103,12 +97,12 @@ a:hover {
   cursor: pointer;
   font-family: var(--font-body);
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-align: center;
-  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  min-height: 46px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  min-height: 44px;
 }
 
 .btn:hover {
@@ -149,7 +143,13 @@ a:hover {
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
+}
+
+@media (min-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -177,7 +177,7 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1.5rem;
   transform: translateY(-100%);
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -188,13 +188,13 @@ a:hover {
 
 .mobile-nav-overlay a {
   font-family: var(--font-heading) !important;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0.05em !important;
   text-transform: uppercase;
   color: var(--text-primary) !important;
   transition: color 0.3s ease;
-  padding: 8px 20px;
+  padding: 8px 16px;
 }
 
 .mobile-nav-overlay a:hover,
@@ -209,19 +209,19 @@ a:hover {
   z-index: 101;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 8px;
+  gap: 4px;
+  padding: 6px;
 }
 
 .hamburger-line {
-  width: 24px;
+  width: 22px;
   height: 2px;
   background-color: var(--text-primary);
   transition: all 0.3s ease;
 }
 
 .hamburger-btn.open .hamburger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .hamburger-btn.open .hamburger-line:nth-child(2) {
@@ -229,20 +229,7 @@ a:hover {
 }
 
 .hamburger-btn.open .hamburger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* Responsive Typography */
-.fluid-h1 {
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
-}
-
-.fluid-h2 {
-  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
-}
-
-.fluid-h3 {
-  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /* Product Card Luxury Styling */
@@ -271,7 +258,7 @@ a:hover {
 .editorial-flex {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -294,26 +281,32 @@ a:hover {
 
 /* Section Padding */
 .section-pad {
-  padding: 50px 0;
+  padding: 40px 0;
 }
 
 @media (min-width: 768px) {
   .section-pad {
-    padding: 80px 0;
+    padding: 70px 0;
   }
 }
 
 @media (min-width: 1024px) {
   .section-pad {
-    padding: 120px 0;
+    padding: 100px 0;
   }
 }
 
-/* Shop Page Specific Responsive Grid */
+/* Shop Page Specific Responsive Grid: 2 columns on mobile, 3 on tablet/desktop */
 .collection-grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 1rem;
+  gap: 1.5rem 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .collection-grid-2 {
+    gap: 2rem 1.25rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -326,20 +319,20 @@ a:hover {
 @media (min-width: 1200px) {
   .collection-grid-2 {
     grid-template-columns: repeat(3, 1fr);
-    gap: 4rem 2.5rem;
+    gap: 3.5rem 2.5rem;
   }
 }
 
 /* Category Filter Pill */
 .filter-pill {
-  padding: 8px 18px;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 2px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   border: 1px solid var(--border-color);
   background-color: transparent;
   color: var(--text-secondary);
@@ -359,9 +352,9 @@ a:hover {
 
 /* Form Controls */
 .luxury-select {
-  padding: 8px 32px 8px 14px;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  padding: 6px 26px 6px 10px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
   font-family: var(--font-body);
   border: 1px solid var(--border-color);
   background-color: transparent;
@@ -372,6 +365,19 @@ a:hover {
   appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23171513%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 8px auto;
+  background-position: right 8px center;
+  background-size: 7px auto;
+}
+
+@media (min-width: 768px) {
+  .bespoke-banner {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2.5rem 1.5rem !important;
+  }
 }

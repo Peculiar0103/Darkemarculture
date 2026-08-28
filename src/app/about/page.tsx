@@ -1,9 +1,20 @@
 export default function AboutPage() {
   return (
-    <div style={{ padding: '100px 0', minHeight: '80vh' }}>
+    <div className="section-pad" style={{ minHeight: '80vh', width: '100%', overflowX: 'hidden' }}>
       <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '2rem', color: 'var(--accent-color)' }}>Our Story</h1>
-        <div style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '2' }}>
+        <span style={{
+          fontSize: '0.75rem',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: 'var(--color-burgundy, #4A0E17)',
+          fontWeight: 600,
+          display: 'block',
+          marginBottom: '0.5rem'
+        }}>
+          Darkemar Heritage
+        </span>
+        <h1 className="fluid-h1" style={{ marginBottom: '1.5rem', color: 'var(--accent-color)' }}>Our Story</h1>
+        <div style={{ color: 'var(--text-secondary)', fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', lineHeight: '1.85' }}>
           <p style={{ marginBottom: '1.5rem' }}>
             Darkemar Culture is built on a foundation of celebrating rich African heritage through the lens of modern, luxury fashion. 
           </p>

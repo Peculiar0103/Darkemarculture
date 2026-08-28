@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, use, useEffect } from 'react'
+import { useState, use } from 'react'
 import { sampleProducts } from '@/data/products'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -36,52 +36,68 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
 
   return (
-    <div style={{ background: 'var(--bg-color)', minHeight: '100vh', color: 'var(--text-primary)' }}>
+    <div style={{ background: 'var(--bg-color)', minHeight: '100vh', color: 'var(--text-primary)', width: '100%', overflowX: 'hidden' }}>
       
       {/* Top Navigation */}
-      <div style={{ padding: '40px 5%', borderBottom: '1px solid var(--border-color)' }}>
-        <Link href="/shop" style={{ 
-          fontSize: '0.75rem', 
-          textTransform: 'uppercase', 
-          letterSpacing: '2px', 
-          color: 'var(--text-secondary)' 
-        }}>
-          &larr; Back to Catalogue
-        </Link>
+      <div style={{ padding: '20px 0', borderBottom: '1px solid var(--border-color)' }}>
+        <div className="container">
+          <Link href="/shop" style={{ 
+            fontSize: '0.72rem', 
+            textTransform: 'uppercase', 
+            letterSpacing: '0.12em', 
+            color: 'var(--text-secondary)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            <span>&larr;</span>
+            <span>Back to Catalogue</span>
+          </Link>
+        </div>
       </div>
 
-      <div className="container" style={{ display: 'flex', flexWrap: 'wrap', minHeight: 'calc(100vh - 100px)' }}>
+      <div className="container" style={{ display: 'flex', flexWrap: 'wrap', minHeight: 'calc(100vh - 120px)' }}>
         
         {/* Left Side - Gallery */}
         <div className="desktop-half" style={{ 
           position: 'relative', 
           background: 'var(--bg-secondary)',
-          minHeight: '50vh'
+          minHeight: '40vh',
+          width: '100%'
         }}>
-          <div style={{ position: 'sticky', top: '100px', height: 'calc(100vh - 100px)', display: 'flex', padding: '2rem' }}>
+          <div style={{ 
+            display: 'flex', 
+            padding: '1.25rem',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }} className="product-gallery-wrapper">
             
             {/* Desktop Thumbnails (Hidden on mobile) */}
             {product.images && product.images.length > 1 && (
               <div className="mobile-hide hide-scroll" style={{ 
                 display: 'flex', 
                 flexDirection: 'column', 
-                gap: '1rem', 
-                width: '80px', 
-                marginRight: '2rem',
+                gap: '0.75rem', 
+                width: '70px', 
+                marginRight: '1.5rem',
                 overflowY: 'auto',
-                paddingRight: '10px'
+                paddingRight: '6px',
+                flexShrink: 0
               }}>
                 {product.images.map((img, idx) => (
                   <button 
                     key={idx}
                     onClick={() => setActiveIndex(idx)}
                     style={{
-                      border: `1px solid ${activeIndex === idx ? 'var(--text-primary)' : 'transparent'}`,
+                      border: `1px solid ${activeIndex === idx ? 'var(--color-burgundy)' : 'transparent'}`,
                       background: 'transparent',
                       padding: '2px',
                       cursor: 'pointer',
                       aspectRatio: '3/4',
-                      width: '100%'
+                      width: '100%',
+                      borderRadius: '2px',
+                      overflow: 'hidden'
                     }}
                   >
                     {img.match(/\.(mp4|webm)$/i) ? (
@@ -95,7 +111,17 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
             )}
 
             {/* Main Image Container */}
-            <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ 
+              flex: 1, 
+              position: 'relative', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              width: '100%',
+              maxWidth: '520px',
+              aspectRatio: '3/4',
+              margin: '0 auto'
+            }}>
               
               {/* Mobile Arrows (Only show on mobile if > 1 image) */}
               <style dangerouslySetInnerHTML={{__html: `
@@ -106,14 +132,30 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
                 <button 
                   className="mobile-arrows"
                   onClick={() => setActiveIndex(prev => prev === 0 ? product.images.length - 1 : prev - 1)}
-                  style={{ position: 'absolute', left: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  style={{ 
+                    position: 'absolute', 
+                    left: '8px', 
+                    zIndex: 10, 
+                    background: 'rgba(255,255,255,0.85)', 
+                    border: 'none', 
+                    borderRadius: '50%', 
+                    width: '36px', 
+                    height: '36px', 
+                    cursor: 'pointer', 
+                    fontSize: '1.1rem', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                  }}
+                  aria-label="Previous image"
                 >
                   &#8592;
                 </button>
               )}
               
               {product.images && product.images.length > 0 ? (
-                <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '100%', overflow: 'hidden', borderRadius: '2px' }}>
                   {product.images[activeIndex].match(/\.(mp4|webm)$/i) ? (
                     <video 
                       key={product.images[activeIndex]}
@@ -133,8 +175,24 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
                   )}
                 </div>
               ) : (
-                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
-                  Images pending
+                <div style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  color: 'var(--text-muted)',
+                  background: 'var(--bg-secondary)',
+                  padding: '2rem',
+                  textAlign: 'center'
+                }}>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', color: 'var(--accent-color)', marginBottom: '0.5rem' }}>
+                    DARKEMAR
+                  </span>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+                    Photos available on request
+                  </span>
                 </div>
               )}
 
@@ -142,7 +200,23 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
                 <button 
                   className="mobile-arrows"
                   onClick={() => setActiveIndex(prev => (prev + 1) % product.images.length)}
-                  style={{ position: 'absolute', right: '10px', zIndex: 10, background: 'rgba(255,255,255,0.7)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  style={{ 
+                    position: 'absolute', 
+                    right: '8px', 
+                    zIndex: 10, 
+                    background: 'rgba(255,255,255,0.85)', 
+                    border: 'none', 
+                    borderRadius: '50%', 
+                    width: '36px', 
+                    height: '36px', 
+                    cursor: 'pointer', 
+                    fontSize: '1.1rem', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                  }}
+                  aria-label="Next image"
                 >
                   &#8594;
                 </button>
@@ -153,74 +227,84 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
         </div>
 
         {/* Right Side - Details & Form */}
-        <div className="desktop-half" style={{ padding: '8% 10%' }}>
+        <div className="desktop-half product-details-wrapper" style={{ 
+          padding: '2rem 0',
+          width: '100%'
+        }}>
           
-          <div style={{ marginBottom: '4rem' }}>
+          <div style={{ marginBottom: '2rem' }}>
             <p style={{ 
-              color: 'var(--accent-color)', 
+              color: 'var(--color-burgundy, #4A0E17)', 
               textTransform: 'uppercase', 
-              letterSpacing: '3px', 
-              fontSize: '0.8rem',
-              marginBottom: '1.5rem'
+              letterSpacing: '0.18em', 
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              marginBottom: '0.75rem'
             }}>
               {product.category}
             </p>
             <h1 style={{ 
-              fontSize: 'clamp(2.5rem, 4vw, 4rem)', 
-              marginBottom: '1.5rem', 
-              lineHeight: '1.1' 
+              fontSize: 'clamp(1.8rem, 5vw, 3.2rem)', 
+              marginBottom: '0.75rem', 
+              lineHeight: '1.15',
+              fontFamily: 'var(--font-heading)'
             }}>
               {product.name}
             </h1>
             <p style={{ 
-              fontSize: '1.8rem', 
-              fontWeight: '300', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-heading)'
+              fontSize: 'clamp(1.4rem, 3.5vw, 1.8rem)', 
+              fontWeight: 600, 
+              color: 'var(--color-burgundy, #4A0E17)',
+              fontFamily: 'var(--font-body)',
+              marginTop: '0.5rem'
             }}>
               {displayPrice}
             </p>
           </div>
 
           <p style={{ 
-            lineHeight: '2', 
+            lineHeight: '1.75', 
             color: 'var(--text-secondary)', 
-            marginBottom: '4rem', 
-            fontSize: '1rem',
-            fontWeight: 300
+            marginBottom: '2.5rem', 
+            fontSize: '0.95rem',
+            fontWeight: 400
           }}>
             {product.description}
           </p>
 
           {/* Options */}
-          <div style={{ marginBottom: '4rem' }}>
+          <div style={{ marginBottom: '2.5rem' }}>
             
             {/* Color Selection */}
             {product.colors.length > 0 && product.colors[0] !== "Default" && (
-              <div style={{ marginBottom: '3rem' }}>
+              <div style={{ marginBottom: '2rem' }}>
                 <label style={{ 
                   display: 'block', 
-                  marginBottom: '1rem', 
+                  marginBottom: '0.75rem', 
                   color: 'var(--text-secondary)', 
                   textTransform: 'uppercase', 
-                  fontSize: '0.75rem', 
-                  letterSpacing: '2px' 
+                  fontSize: '0.72rem', 
+                  letterSpacing: '0.12em',
+                  fontWeight: 600
                 }}>
-                  Select Color
+                  Select Color: <strong style={{ color: 'var(--text-primary)' }}>{selectedColor}</strong>
                 </label>
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                   {product.colors.map(color => (
                     <button 
                       key={color}
                       onClick={() => setSelectedColor(color)}
                       style={{
-                        padding: '12px 24px',
-                        border: `1px solid ${selectedColor === color ? 'var(--text-primary)' : 'var(--border-color)'}`,
-                        background: 'transparent',
-                        color: selectedColor === color ? 'var(--text-primary)' : 'var(--text-secondary)',
+                        padding: '10px 18px',
+                        border: `1px solid ${selectedColor === color ? 'var(--color-burgundy)' : 'var(--border-color)'}`,
+                        background: selectedColor === color ? 'rgba(74, 14, 23, 0.05)' : 'transparent',
+                        color: selectedColor === color ? 'var(--color-burgundy)' : 'var(--text-secondary)',
                         cursor: 'pointer',
-                        fontSize: '0.85rem',
-                        transition: 'all 0.4s ease'
+                        fontSize: '0.8rem',
+                        fontWeight: selectedColor === color ? 600 : 400,
+                        transition: 'all 0.25s ease',
+                        borderRadius: '2px',
+                        minHeight: '44px'
                       }}
                     >
                       {color}
@@ -232,30 +316,34 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
 
             {/* Size Selection */}
             {product.sizes.length > 0 && (
-              <div style={{ marginBottom: '3rem' }}>
+              <div style={{ marginBottom: '2rem' }}>
                 <label style={{ 
                   display: 'block', 
-                  marginBottom: '1rem', 
+                  marginBottom: '0.75rem', 
                   color: 'var(--text-secondary)', 
                   textTransform: 'uppercase', 
-                  fontSize: '0.75rem', 
-                  letterSpacing: '2px' 
+                  fontSize: '0.72rem', 
+                  letterSpacing: '0.12em',
+                  fontWeight: 600
                 }}>
                   Select Size
                 </label>
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                   {product.sizes.map(size => (
                     <button 
                       key={size}
                       onClick={() => setSelectedSize(size)}
                       style={{
-                        padding: '12px 24px',
-                        border: `1px solid ${selectedSize === size ? 'var(--text-primary)' : 'var(--border-color)'}`,
-                        background: 'transparent',
-                        color: selectedSize === size ? 'var(--text-primary)' : 'var(--text-secondary)',
+                        padding: '10px 20px',
+                        border: `1px solid ${selectedSize === size ? 'var(--color-burgundy)' : 'var(--border-color)'}`,
+                        background: selectedSize === size ? 'rgba(74, 14, 23, 0.05)' : 'transparent',
+                        color: selectedSize === size ? 'var(--color-burgundy)' : 'var(--text-secondary)',
                         cursor: 'pointer',
-                        fontSize: '0.85rem',
-                        transition: 'all 0.4s ease'
+                        fontSize: '0.8rem',
+                        fontWeight: selectedSize === size ? 600 : 400,
+                        transition: 'all 0.25s ease',
+                        borderRadius: '2px',
+                        minHeight: '44px'
                       }}
                     >
                       {size}
@@ -268,41 +356,107 @@ Please provide the next steps for my order.`.replace(/\n\n+/g, '\n\n')
             {/* Quantity */}
             <div>
               <label style={{ 
-                  display: 'block', 
-                  marginBottom: '1rem', 
-                  color: 'var(--text-secondary)', 
-                  textTransform: 'uppercase', 
-                  fontSize: '0.75rem', 
-                  letterSpacing: '2px' 
-                }}>
+                display: 'block', 
+                marginBottom: '0.75rem', 
+                color: 'var(--text-secondary)', 
+                textTransform: 'uppercase', 
+                fontSize: '0.72rem', 
+                letterSpacing: '0.12em',
+                fontWeight: 600
+              }}>
                 Quantity
               </label>
-              <input 
-                type="number" 
-                min="1" 
-                value={quantity} 
-                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                style={{ 
-                  padding: '12px 24px', 
-                  width: '100px', 
-                  border: '1px solid var(--border-color)', 
-                  background: 'transparent', 
-                  color: 'var(--text-primary)', 
-                  fontSize: '1rem',
-                  outline: 'none'
-                }}
-              />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    border: '1px solid var(--border-color)',
+                    background: 'transparent',
+                    color: 'var(--text-primary)',
+                    cursor: 'pointer',
+                    fontSize: '1.2rem',
+                    borderRadius: '2px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  aria-label="Decrease quantity"
+                >
+                  -
+                </button>
+                <input 
+                  type="number" 
+                  min="1" 
+                  value={quantity} 
+                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                  style={{ 
+                    padding: '10px', 
+                    width: '60px', 
+                    height: '44px',
+                    border: '1px solid var(--border-color)', 
+                    background: 'transparent', 
+                    color: 'var(--text-primary)', 
+                    fontSize: '1rem',
+                    textAlign: 'center',
+                    outline: 'none',
+                    borderRadius: '2px'
+                  }}
+                />
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    border: '1px solid var(--border-color)',
+                    background: 'transparent',
+                    color: 'var(--text-primary)',
+                    cursor: 'pointer',
+                    fontSize: '1.2rem',
+                    borderRadius: '2px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
 
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-solid" style={{ width: '100%', padding: '20px' }}>
-            Order via WhatsApp
+          <a 
+            href={whatsappUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn btn-solid" 
+            style={{ 
+              width: '100%', 
+              padding: '16px',
+              fontSize: '0.85rem',
+              minHeight: '52px'
+            }}
+          >
+            Order via WhatsApp &rarr;
           </a>
-
-
 
         </div>
       </div>
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (min-width: 768px) {
+          .product-gallery-wrapper {
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 120px);
+            padding: 2rem;
+          }
+          .product-details-wrapper {
+            padding: 6% 8% !important;
+          }
+        }
+      `}} />
     </div>
   )
 }

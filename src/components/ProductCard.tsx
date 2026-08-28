@@ -36,7 +36,8 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         flexDirection: 'column',
         height: '100%',
         position: 'relative',
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+        width: '100%',
+        minWidth: 0
       }}
     >
       {/* 1. IMAGE CONTAINER */}
@@ -49,7 +50,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           backgroundColor: 'var(--bg-secondary)',
           overflow: 'hidden',
           display: 'block',
-          borderRadius: '1px'
+          borderRadius: '2px'
         }}
       >
         {displayImage ? (
@@ -64,8 +65,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'top center',
-                transition: 'transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1)'
+                objectPosition: 'top center'
               }}
               className="enhanced-product-img"
             />
@@ -79,7 +79,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
                 objectFit: 'cover',
                 objectPosition: 'top center',
                 transform: isHovered ? 'scale(1.04)' : 'scale(1)',
-                transition: 'transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease'
+                transition: 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease'
               }}
               className="enhanced-product-img"
               loading={priority ? 'eager' : 'lazy'}
@@ -94,35 +94,35 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '2rem',
+            padding: '1rem',
             textAlign: 'center',
             background: 'linear-gradient(135deg, #EFE9DF 0%, #E2D7C7 100%)',
             color: 'var(--text-secondary)'
           }}>
             <span style={{ 
               fontFamily: 'var(--font-heading)', 
-              fontSize: '2rem', 
+              fontSize: 'clamp(1.2rem, 4vw, 1.8rem)', 
               color: 'var(--accent-color)', 
-              marginBottom: '0.5rem',
+              marginBottom: '0.3rem',
               letterSpacing: '0.1em'
             }}>
               DARKEMAR
             </span>
             <span style={{ 
-              fontSize: '0.75rem', 
+              fontSize: '0.68rem', 
               textTransform: 'uppercase', 
-              letterSpacing: '0.2em', 
+              letterSpacing: '0.15em', 
               color: 'var(--text-muted)' 
             }}>
               Crafted to Order
             </span>
             <span style={{ 
-              fontSize: '0.7rem', 
-              marginTop: '0.5rem', 
+              fontSize: '0.65rem', 
+              marginTop: '0.4rem', 
               color: 'var(--color-burgundy, #4A0E17)', 
               fontWeight: 500 
             }}>
-              Inquire for Views
+              Inquire on WhatsApp
             </span>
           </div>
         )}
@@ -131,21 +131,21 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         {hasMultipleImages && (
           <div style={{
             position: 'absolute',
-            bottom: '12px',
-            right: '12px',
-            backgroundColor: 'rgba(23, 21, 19, 0.65)',
-            backdropFilter: 'blur(6px)',
+            bottom: '8px',
+            right: '8px',
+            backgroundColor: 'rgba(23, 21, 19, 0.72)',
+            backdropFilter: 'blur(4px)',
             color: '#FFFFFF',
-            fontSize: '0.65rem',
-            letterSpacing: '0.08em',
-            padding: '4px 8px',
+            fontSize: 'clamp(0.55rem, 1.8vw, 0.65rem)',
+            letterSpacing: '0.06em',
+            padding: '2px 6px',
             borderRadius: '2px',
             display: 'flex',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             pointerEvents: 'none'
           }}>
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
               <circle cx="8.5" cy="8.5" r="1.5"></circle>
               <polyline points="21 15 16 10 5 21"></polyline>
@@ -157,15 +157,15 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         {/* Category Pill on Image */}
         <div style={{
           position: 'absolute',
-          top: '12px',
-          left: '12px',
-          backgroundColor: 'rgba(247, 243, 236, 0.92)',
-          backdropFilter: 'blur(6px)',
+          top: '8px',
+          left: '8px',
+          backgroundColor: 'rgba(247, 243, 236, 0.94)',
+          backdropFilter: 'blur(4px)',
           color: 'var(--text-primary)',
-          fontSize: '0.65rem',
-          letterSpacing: '0.15em',
+          fontSize: 'clamp(0.55rem, 1.8vw, 0.65rem)',
+          letterSpacing: '0.1em',
           textTransform: 'uppercase',
-          padding: '4px 10px',
+          padding: '2px 6px',
           fontWeight: 600,
           border: '1px solid rgba(23, 21, 19, 0.08)'
         }}>
@@ -175,22 +175,27 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
       {/* 2. PRODUCT DETAILS */}
       <div style={{
-        paddingTop: '1.25rem',
-        paddingBottom: '0.5rem',
+        paddingTop: '0.75rem',
+        paddingBottom: '0.4rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.4rem',
-        flexGrow: 1
+        gap: '0.3rem',
+        flexGrow: 1,
+        minWidth: 0
       }}>
         {/* Product Name */}
         <h3 style={{
-          fontSize: '1.1rem',
+          fontSize: 'clamp(0.9rem, 2.8vw, 1.15rem)',
           fontWeight: 500,
           fontFamily: 'var(--font-heading)',
           color: 'var(--text-primary)',
-          letterSpacing: '0.02em',
-          lineHeight: '1.3',
-          margin: 0
+          letterSpacing: '0.01em',
+          lineHeight: '1.25',
+          margin: 0,
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical'
         }}>
           <Link 
             href={`/product/${product.slug}`}
@@ -204,11 +209,10 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         <div style={{
           display: 'flex',
           alignItems: 'baseline',
-          gap: '0.6rem',
-          marginTop: '0.2rem'
+          marginTop: '0.1rem'
         }}>
           <span style={{
-            fontSize: '1.05rem',
+            fontSize: 'clamp(0.95rem, 3vw, 1.15rem)',
             fontWeight: 600,
             color: 'var(--color-burgundy, #4A0E17)',
             fontFamily: 'var(--font-body)'
@@ -217,39 +221,42 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           </span>
         </div>
 
-        {/* Colorway / Options note if available */}
+        {/* Colorway note if available */}
         {product.colors && product.colors.length > 0 && product.colors[0] !== 'Default' && (
           <p style={{
-            fontSize: '0.75rem',
+            fontSize: '0.7rem',
             color: 'var(--text-secondary)',
-            margin: '0.2rem 0 0 0',
-            fontStyle: 'italic'
+            margin: '0.1rem 0 0 0',
+            fontStyle: 'italic',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}>
-            {product.colors.length} color combinations available
+            {product.colors.length} colorways
           </p>
         )}
 
         {/* Subtle Action Link */}
-        <div style={{ marginTop: 'auto', paddingTop: '0.8rem' }}>
+        <div style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
           <Link 
             href={`/product/${product.slug}`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.75rem',
-              letterSpacing: '0.15em',
+              gap: '4px',
+              fontSize: 'clamp(0.68rem, 2vw, 0.75rem)',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
               fontWeight: 500,
               color: 'var(--text-primary)',
               borderBottom: '1px solid var(--border-color)',
-              paddingBottom: '3px',
+              paddingBottom: '2px',
               transition: 'all 0.3s ease'
             }}
             className="product-card-link"
           >
             <span>Discover More</span>
-            <span style={{ fontSize: '0.85rem' }}>&rarr;</span>
+            <span style={{ fontSize: '0.8rem' }}>&rarr;</span>
           </Link>
         </div>
       </div>
